@@ -9,6 +9,8 @@
 #ifndef DETI_COINS_CPU_SEARCH
 #define DETI_COINS_CPU_SEARCH
 
+#include <stdio.h>
+
 static void deti_coins_cpu_search(void)
 {
   u32_t n,idx,coin[13u],hash[4u];
@@ -43,6 +45,9 @@ static void deti_coins_cpu_search(void)
   //
   for(n_attempts = n_coins = 0ul;stop_request == 0;n_attempts++)
   {
+#ifdef DEBUG_COIN_STRING
+    printf("Testing coin: %s", (char *)bytes);
+#endif
     //
     // compute MD5 hash
     //
