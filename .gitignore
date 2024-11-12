@@ -1,4 +1,13 @@
+# Código compilado
+a.out
+deti_coins_intel
+deti_coins_apple
+deti_coins_intel_cuda
+*.cubin
+
+# Visual Studio code
 .vscode/
 
+# KDevelop
 .kdev4/
 *.kdev4
