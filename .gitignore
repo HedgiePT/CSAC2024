@@ -11,3 +11,4 @@ deti_coins_intel_cuda
 # KDevelop
 .kdev4/
 *.kdev4
+*.kate-swp
