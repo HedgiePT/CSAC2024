@@ -12,9 +12,13 @@
 #ifndef DETI_COINS_CPU_AVX_SEARCH
 #define DETI_COINS_CPU_AVX_SEARCH
 
+// Includes desnecessários; apenas ajudam a IDE a compreender o código.
+#include "deti_coins.c"
+#include "md5_cpu_avx.h"
+
+// Includes importantes
 #include <inttypes.h>
 #include "deti_coin_const.h"
-#include "md5_cpu_avx.h"    // Tecnicamente desnecessário.
 
 // Vetor de 4 signed ints de 32 bits (4 bytes) cada.
 typedef int32_t i32x4 __attribute__ ((vector_size (16)));   // 4*4 = 16
