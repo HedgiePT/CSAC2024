@@ -13,7 +13,6 @@
 #define DETI_COINS_CPU_AVX_SEARCH
 
 // Includes desnecessários; apenas ajudam a IDE a compreender o código.
-#include "deti_coins.c"
 #include "md5_cpu_avx.h"
 
 // Includes importantes
@@ -28,9 +27,9 @@ typedef int32_t i32x4 __attribute__ ((vector_size (16)));   // 4*4 = 16
 
 
 static void init_coins(i32x4 *v4array) {
-    v4array[0] = BROADCAST((int32_t)k_deti_coin_header[0]);
-    v4array[1] = BROADCAST((int32_t)k_deti_coin_header[1]);
-    v4array[2] = BROADCAST((int32_t)k_deti_coin_header[2]);
+    v4array[0] = BROADCAST((int32_t)COIN_STD_HEADER[0]);
+    v4array[1] = BROADCAST((int32_t)COIN_STD_HEADER[1]);
+    v4array[2] = BROADCAST((int32_t)COIN_STD_HEADER[2]);
 
     for (int i = 3; i < 12; i++) {
         v4array[i] = BROADCAST(' ');
@@ -53,6 +52,14 @@ static void deti_coins_cpu_avx_search(uint32_t n_random_words)
         md5_cpu_avx(v4coin, v4hash);
 
         // Implementar resto do código aqui...
+
+        /* IDEA PARA GERAR MODEAS:
+         *
+         * Cada lane começa com um prefixo diferente;
+         * Depois, para cada iteração, geramos uma string com os X caracteres
+         * restantes (corpo - prefixo), e copíamos essa string para todas as
+         * lanes.
+         */
 
         n_attempts++;
     }
