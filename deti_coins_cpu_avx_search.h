@@ -68,20 +68,15 @@ static void deti_coins_cpu_avx_search(uint32_t n_random_words)
     v4coin[11] = BROADCAST(v2);
     v4coin[12] = BROADCAST_INC(0x0a202020);
 
-    /* IDEA PARA GERAR MODEAS:
-     *
-     * Cada lane começa com um prefixo diferente;
-     * Depois, para cada iteração, geramos uma string com os X caracteres
-     * restantes (corpo - prefixo), e copíamos essa string para todas as
-     * lanes.
-     */
-
     uint64_t n_attempts = 0, n_coins = 0;
+
+    if (n_random_words > 4)
+        n_random_words = 4;
 
     while (!stop_request) {
         //printf("v4coin[10]=%x, [11]=%x, [12]=%x\n", v4coin[10][3], v4coin[11][3], v4coin[12][3]);
         md5_cpu_avx(v4coin, v4hash);
-        for(uint32_t lane = 0; lane < 4; lane++)
+        for(uint32_t lane = 0; lane < n_random_words; lane++)
             if(v4hash[3][lane] == 0)
             {
                 uint32_t coin[13];
@@ -99,7 +94,7 @@ static void deti_coins_cpu_avx_search(uint32_t n_random_words)
             v4coin[11] = BROADCAST(v2);
         }
 
-        n_attempts += 4;
+        n_attempts += n_random_words;
     }
 
     STORE_DETI_COINS();
