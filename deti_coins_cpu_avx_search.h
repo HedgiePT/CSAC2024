@@ -102,4 +102,7 @@ static void deti_coins_cpu_avx_search(uint32_t n_random_words)
 
 }
 
+#undef BROADCAST
+#undef BROADCAST_INC
+
 #endif
